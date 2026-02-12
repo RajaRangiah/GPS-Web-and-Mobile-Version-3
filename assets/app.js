@@ -420,3 +420,36 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 })();
+// ===============================
+// Mobile Overlay Nav Toggle
+// ===============================
+document.addEventListener("DOMContentLoaded", () => {
+  const btn = document.querySelector(".mobile-menu-btn");
+  const overlay = document.querySelector(".mobile-overlay");
+  const closeBtn = document.querySelector(".overlay-close");
+
+  if (!btn || !overlay) return;
+
+  const openMenu = () => {
+    overlay.classList.add("active");
+    document.body.classList.add("menu-open");
+  };
+
+  const closeMenu = () => {
+    overlay.classList.remove("active");
+    document.body.classList.remove("menu-open");
+  };
+
+  btn.addEventListener("click", openMenu);
+  if (closeBtn) closeBtn.addEventListener("click", closeMenu);
+
+  // Close when clicking any link in overlay
+  overlay.addEventListener("click", (e) => {
+    if (e.target.tagName === "A") closeMenu();
+  });
+
+  // ESC to close
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape") closeMenu();
+  });
+});
